@@ -383,7 +383,7 @@
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-save"></i> Update About Information
                 </button>
-                <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">
+                <a href="{{ route('backend.dashboard') }}" class="btn btn-secondary">
                     <i class="fas fa-arrow-left"></i> Back to Dashboard
                 </a>
             </div>

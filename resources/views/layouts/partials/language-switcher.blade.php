@@ -11,14 +11,14 @@
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
         @if(app()->getLocale() !== 'en')
             <li>
-                <a class="dropdown-item" href="{{ route('language.switch', ['locale' => 'en']) }}">
+                <a class="dropdown-item" href="{{ localized_url('en') }}">
                     <span class="flag-icon flag-icon-gb me-2"></span> English
                 </a>
             </li>
         @endif
         @if(app()->getLocale() !== 'lv')
             <li>
-                <a class="dropdown-item" href="{{ route('language.switch', ['locale' => 'lv']) }}">
+                <a class="dropdown-item" href="{{ localized_url('lv') }}">
                     <span class="flag-icon flag-icon-lv me-2"></span> Latviešu
                 </a>
             </li>

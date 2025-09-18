@@ -15,7 +15,7 @@
         <h3 class="card-title">Edit Feature</h3>
     </div>
     <div class="card-body">
-        <form action="{{ route('features.update', $feature->id) }}" method="POST">
+        <form id="feature-edit-form" action="{{ route('features.update', $feature->id) }}" method="POST" data-ajax="true" data-auto-save="true">
             @csrf
             @method('PUT')
             
@@ -124,7 +124,9 @@
             </div>
             
             <div class="mt-4">
-                <button type="submit" class="btn btn-primary">Update Feature</button>
+                <button type="submit" class="btn btn-primary" id="save-btn">
+                    <i class="fas fa-save"></i> Update Feature
+                </button>
                 <a href="{{ route('features.index') }}" class="btn btn-secondary">Cancel</a>
             </div>
         </form>

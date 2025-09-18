@@ -34,13 +34,13 @@
                 <h5>{{ __('Quick Links') }}</h5>
                 <ul class="list-unstyled w-100">
                   <li>
-                    <a href="#">{{ __('Terms & Conditions') }}</a>
+                    <a href="/{{ app()->getLocale() }}/{{ route_slug('terms-conditions', app()->getLocale()) }}">{{ __('Terms & Conditions') }}</a>
                   </li>
                   <li>
-                    <a href="#">{{ __('Privacy Policy') }}</a>
+                    <a href="/{{ app()->getLocale() }}/{{ route_slug('privacy-policy', app()->getLocale()) }}">{{ __('Privacy Policy') }}</a>
                   </li>
                   <li>
-                    <a href="#">{{ __('Cookies') }}</a>
+                    <a href="/{{ app()->getLocale() }}/{{ route_slug('cookies', app()->getLocale()) }}">{{ __('Cookies') }}</a>
                   </li>
                 </ul>
               </div>

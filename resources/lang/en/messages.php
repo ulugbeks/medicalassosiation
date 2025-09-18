@@ -87,4 +87,15 @@ return [
     'Meta Title' => 'Meta Title',
     'Meta Description' => 'Meta Description',
     'Meta Keywords' => 'Meta Keywords',
+    
+    // Static Pages
+    'Static Pages' => 'Static Pages',
+    'Create Page' => 'Create Page',
+    'Edit Page' => 'Edit Page',
+    'Page updated successfully!' => 'Page updated successfully!',
+    'Page created successfully!' => 'Page created successfully!',
+    'Page deleted successfully!' => 'Page deleted successfully!',
+    'Slug' => 'Slug',
+    'URL-friendly identifier' => 'URL-friendly identifier',
+    'Back to Dashboard' => 'Back to Dashboard',
 ];

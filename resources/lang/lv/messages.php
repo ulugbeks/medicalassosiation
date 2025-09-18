@@ -87,4 +87,15 @@ return [
     'Meta Title' => 'Meta Virsraksts',
     'Meta Description' => 'Meta Apraksts',
     'Meta Keywords' => 'Meta Atslēgvārdi',
+    
+    // Static Pages
+    'Static Pages' => 'Statiskās Lapas',
+    'Create Page' => 'Izveidot Lapu',
+    'Edit Page' => 'Rediģēt Lapu',
+    'Page updated successfully!' => 'Lapa veiksmīgi atjaunota!',
+    'Page created successfully!' => 'Lapa veiksmīgi izveidota!',
+    'Page deleted successfully!' => 'Lapa veiksmīgi dzēsta!',
+    'Slug' => 'Adrese',
+    'URL-friendly identifier' => 'URL draudzīgs identifikators',
+    'Back to Dashboard' => 'Atpakaļ uz Informācijas Paneli',
 ];

@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Models\Language;
+use App\Http\Controllers\Admin\Traits\AjaxResponseTrait;
 
 class ServiceController extends Controller
 {
+    use AjaxResponseTrait;
     public function index()
     {
         $services = Service::orderBy('order')->get();

@@ -41,7 +41,7 @@
       <div class="icon">
         <i class="fas fa-envelope"></i>
       </div>
-      <a href="{{ route('admin.contacts') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{ route('backend.contacts') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
     </div>
   </div>
   
@@ -54,7 +54,7 @@
       <div class="icon">
         <i class="fas fa-bell"></i>
       </div>
-      <a href="{{ route('admin.contacts') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{ route('backend.contacts') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
     </div>
   </div>
 </div>
@@ -94,7 +94,7 @@
         </table>
       </div>
       <div class="card-footer clearfix">
-        <a href="{{ route('admin.contacts') }}" class="btn btn-sm btn-secondary float-right">View All Messages</a>
+        <a href="{{ route('backend.contacts') }}" class="btn btn-sm btn-secondary float-right">View All Messages</a>
       </div>
     </div>
   </div>
@@ -181,7 +181,7 @@
       <div class="icon">
         <i class="fas fa-envelope"></i>
       </div>
-      <a href="{{ route('admin.contacts') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{ route('backend.contacts') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
     </div>
   </div>
   
@@ -194,7 +194,7 @@
       <div class="icon">
         <i class="fas fa-bell"></i>
       </div>
-      <a href="{{ route('admin.contacts') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{ route('backend.contacts') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
     </div>
   </div>
 </div>
@@ -234,7 +234,7 @@
         </table>
       </div>
       <div class="card-footer clearfix">
-        <a href="{{ route('admin.contacts') }}" class="btn btn-sm btn-secondary float-right">View All Messages</a>
+        <a href="{{ route('backend.contacts') }}" class="btn btn-sm btn-secondary float-right">View All Messages</a>
       </div>
     </div>
   </div>

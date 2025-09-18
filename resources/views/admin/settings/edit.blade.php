@@ -20,7 +20,7 @@
             </div>
         @endif -->
         
-        <form action="{{ route('settings.update') }}" method="POST">
+        <form id="settings-form" action="{{ route('settings.update') }}" method="POST" data-ajax="true" data-auto-save="true">
             @csrf
             @method('PUT')
             
@@ -299,7 +299,9 @@
             </div>
             
             <div class="mt-4">
-                <button type="submit" class="btn btn-primary">Save Settings</button>
+                <button type="submit" class="btn btn-primary" id="save-btn">
+                    <i class="fas fa-save"></i> Save Settings
+                </button>
             </div>
         </form>
     </div>

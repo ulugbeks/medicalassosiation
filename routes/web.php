@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\ContactPageSeoController;
 use App\Http\Controllers\Admin\HomePageSeoController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\SectionHeadingController;
+use App\Http\Controllers\Admin\StaticPageController;
 use App\Http\Controllers\ImageUploadController;
 use App\Models\Language;
 
@@ -66,18 +67,38 @@ Route::middleware(['setlocale'])->group(function () {
     })->name('language.switch');
 
     // Маршруты для версий с префиксом локали
-    Route::prefix('{locale}')->where(['locale' => '[a-zA-Z]{2}'])->group(function () {
+    Route::prefix('{locale}')->where(['locale' => '[a-zA-Z]{2}'])->middleware(['locale'])->group(function () {
         Route::get('/', [PageController::class, 'home'])->name('localized.home');
+        
+        // About us with translated slugs
         Route::get('/about-us', [PageController::class, 'about'])->name('localized.about');
+        Route::get('/par-mums', [PageController::class, 'about'])->name('localized.about.lv');
+        
+        // Contact with translated slugs
         Route::get('/contact', [ContactController::class, 'index'])->name('localized.contact');
+        Route::get('/kontakti', [ContactController::class, 'index'])->name('localized.contact.lv');
         Route::post('/contact', [ContactController::class, 'submit'])->name('localized.contact.submit');
+        Route::post('/kontakti', [ContactController::class, 'submit'])->name('localized.contact.submit.lv');
+        
+        // Static pages with translated slugs
+        Route::get('/terms-conditions', [PageController::class, 'termsConditions'])->name('localized.terms');
+        Route::get('/noteikumi-un-nosacijumi', [PageController::class, 'termsConditions'])->name('localized.terms.lv');
+        
+        Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('localized.privacy');
+        Route::get('/privatuma-politika', [PageController::class, 'privacyPolicy'])->name('localized.privacy.lv');
+        
+        Route::get('/cookies', [PageController::class, 'cookies'])->name('localized.cookies');
+        Route::get('/sikdatnes', [PageController::class, 'cookies'])->name('localized.cookies.lv');
         
         // Локализованные маршруты блога
-        Route::prefix('blog')->group(function () {
-            Route::get('/', [BlogController::class, 'index'])->name('localized.blog.index');
-            Route::get('/{slug}', [BlogController::class, 'show'])->name('localized.blog.show');
-            Route::get('/category/{slug}', [BlogController::class, 'category'])->name('localized.blog.category');
-        });
+        Route::get('/blog', [BlogController::class, 'index'])->name('localized.blog.index');
+        Route::get('/blogs', [BlogController::class, 'index'])->name('localized.blog.index.lv');
+        
+        Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('localized.blog.show');
+        Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('localized.blog.show.lv');
+        
+        Route::get('/blog/category/{slug}', [BlogController::class, 'category'])->name('localized.blog.category');
+        Route::get('/blogs/kategorija/{slug}', [BlogController::class, 'category'])->name('localized.blog.category.lv');
     });
     
     // Подписка на рассылку
@@ -87,8 +108,8 @@ Route::middleware(['setlocale'])->group(function () {
 });
 
 // Админские маршруты
-Route::prefix('admin')->middleware(['auth'])->group(function () {
-    Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+Route::prefix('backend')->middleware(['auth'])->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('backend.dashboard');
     
     // Управление слайдерами
     Route::resource('sliders', SliderController::class);
@@ -116,10 +137,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     
     // Управление контактами
     Route::resource('contact-locations', ContactLocationController::class);
-    Route::get('contacts', [ContactController::class, 'adminIndex'])->name('admin.contacts');
-    Route::get('admin/contacts/{id}', [ContactController::class, 'show'])->name('admin.contacts.show');
-    Route::put('admin/contacts/{id}/mark-as-read', [ContactController::class, 'markAsRead'])->name('admin.contacts.mark-as-read');
-    Route::delete('admin/contacts/{id}', [ContactController::class, 'destroy'])->name('admin.contacts.destroy');
+    Route::get('contacts', [ContactController::class, 'adminIndex'])->name('backend.contacts');
+    Route::get('contacts/{id}', [ContactController::class, 'show'])->name('backend.contacts.show');
+    Route::put('contacts/{id}/mark-as-read', [ContactController::class, 'markAsRead'])->name('backend.contacts.mark-as-read');
+    Route::delete('contacts/{id}', [ContactController::class, 'destroy'])->name('backend.contacts.destroy');
     
     // Управление настройками
     Route::get('settings', [SettingController::class, 'edit'])->name('settings.edit');
@@ -158,6 +179,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     // Управление языками
     Route::resource('languages', LanguageController::class);
+    
+    // Управление статическими страницами
+    Route::resource('static-pages', StaticPageController::class);
 });
 
 // Аутентификация

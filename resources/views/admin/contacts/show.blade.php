@@ -6,7 +6,7 @@
 @section('page_title', 'View Message')
 
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="{{ route('admin.contacts') }}">Contact Messages</a></li>
+<li class="breadcrumb-item"><a href="{{ route('backend.contacts') }}">Contact Messages</a></li>
 <li class="breadcrumb-item active">View Message</li>
 @endsection
 
@@ -15,14 +15,14 @@
     <div class="card-header">
         <h3 class="card-title">Message Details</h3>
         <div class="card-tools">
-            <form action="{{ route('admin.contacts.mark-as-read', $message->id) }}" method="POST" style="display:inline">
+            <form action="{{ route('backend.contacts.mark-as-read', $message->id) }}" method="POST" style="display:inline">
                 @csrf
                 @method('PUT')
                 <button type="submit" class="btn btn-sm {{ $message->read ? 'btn-secondary' : 'btn-success' }}">
                     {{ $message->read ? 'Mark as Unread' : 'Mark as Read' }}
                 </button>
             </form>
-            <form action="{{ route('admin.contacts.destroy', $message->id) }}" method="POST" style="display:inline">
+            <form action="{{ route('backend.contacts.destroy', $message->id) }}" method="POST" style="display:inline">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this message?')">
@@ -79,7 +79,7 @@
         </div>
         
         <div class="mt-4">
-            <a href="{{ route('admin.contacts') }}" class="btn btn-secondary">
+            <a href="{{ route('backend.contacts') }}" class="btn btn-secondary">
                 <i class="fas fa-arrow-left"></i> Back to Messages
             </a>
             <a href="mailto:{{ $message->email }}" class="btn btn-primary">

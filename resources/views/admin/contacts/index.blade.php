@@ -45,10 +45,10 @@
                         </span>
                     </td>
                     <td>
-                        <a href="{{ route('admin.contacts.show', $message->id) }}" class="btn btn-info btn-sm">
+                        <a href="{{ route('backend.contacts.show', $message->id) }}" class="btn btn-info btn-sm">
                             <i class="fas fa-eye"></i>
                         </a>
-                        <form action="{{ route('admin.contacts.destroy', $message->id) }}" method="POST" style="display:inline">
+                        <form action="{{ route('backend.contacts.destroy', $message->id) }}" method="POST" style="display:inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this message?')">

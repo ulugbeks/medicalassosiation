@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Feature;
 use App\Models\Language;
+use App\Http\Controllers\Admin\Traits\AjaxResponseTrait;
 
 class FeatureController extends Controller
 {
+    use AjaxResponseTrait;
     public function index()
     {
         $features = Feature::orderBy('order')->get();
@@ -23,50 +25,52 @@ class FeatureController extends Controller
 
     public function store(Request $request)
     {
-        $languages = active_languages();
-        $defaultLanguage = default_language();
-        
-        $rules = [];
-        foreach ($languages as $language) {
-            $isRequired = $language->is_default;
-            $rules["title.{$language->code}"] = $isRequired ? 'required|string|max:255' : 'nullable|string|max:255';
-            $rules["description.{$language->code}"] = 'nullable|string';
-        }
-        
-        $rules = array_merge($rules, [
-            'icon' => 'nullable|string|max:255',
-            'link_url' => 'nullable|string|max:255',
-            'order' => 'nullable|integer',
-            'active' => 'boolean',
-        ]);
-        
-        $request->validate($rules);
-        
-        $feature = new Feature();
-        
-        // Set translatable fields
-        foreach ($languages as $language) {
-            $locale = $language->code;
+        return $this->handleAjaxStore($request, function() use ($request) {
+            $languages = active_languages();
+            $defaultLanguage = default_language();
             
-            if (isset($request->title[$locale])) {
-                $feature->setTranslation('title', $locale, $request->title[$locale]);
+            $rules = [];
+            foreach ($languages as $language) {
+                $isRequired = $language->is_default;
+                $rules["title.{$language->code}"] = $isRequired ? 'required|string|max:255' : 'nullable|string|max:255';
+                $rules["description.{$language->code}"] = 'nullable|string';
             }
             
-            if (isset($request->description[$locale])) {
-                $feature->setTranslation('description', $locale, $request->description[$locale]);
+            $rules = array_merge($rules, [
+                'icon' => 'nullable|string|max:255',
+                'link_url' => 'nullable|string|max:255',
+                'order' => 'nullable|integer',
+                'active' => 'boolean',
+            ]);
+            
+            $request->validate($rules);
+            
+            $feature = new Feature();
+            
+            // Set translatable fields
+            foreach ($languages as $language) {
+                $locale = $language->code;
+                
+                if (isset($request->title[$locale])) {
+                    $feature->setTranslation('title', $locale, $request->title[$locale]);
+                }
+                
+                if (isset($request->description[$locale])) {
+                    $feature->setTranslation('description', $locale, $request->description[$locale]);
+                }
             }
-        }
-        
-        // Set non-translatable fields
-        $feature->icon = $request->icon;
-        $feature->link_url = $request->link_url;
-        $feature->order = $request->order ?? 0;
-        $feature->active = $request->has('active') ? 1 : 0;
-        
-        $feature->save();
-        
-        return redirect()->route('features.index')
-            ->with('success', 'Feature created successfully.');
+            
+            // Set non-translatable fields
+            $feature->icon = $request->icon;
+            $feature->link_url = $request->link_url;
+            $feature->order = $request->order ?? 0;
+            $feature->active = $request->has('active') ? 1 : 0;
+            
+            $feature->save();
+            
+            return redirect()->route('features.index')
+                ->with('success', 'Feature created successfully.');
+        }, 'Feature created successfully!');
     }
 
     public function edit(Feature $feature)
@@ -77,55 +81,59 @@ class FeatureController extends Controller
 
     public function update(Request $request, Feature $feature)
     {
-        $languages = active_languages();
-        $defaultLanguage = default_language();
-        
-        $rules = [];
-        foreach ($languages as $language) {
-            $isRequired = $language->is_default;
-            $rules["title.{$language->code}"] = $isRequired ? 'required|string|max:255' : 'nullable|string|max:255';
-            $rules["description.{$language->code}"] = 'nullable|string';
-        }
-        
-        $rules = array_merge($rules, [
-            'icon' => 'nullable|string|max:255',
-            'link_url' => 'nullable|string|max:255',
-            'order' => 'nullable|integer',
-            'active' => 'boolean',
-        ]);
-        
-        $request->validate($rules);
-        
-        // Update translatable fields
-        foreach ($languages as $language) {
-            $locale = $language->code;
+        return $this->handleAjaxUpdate($request, function() use ($request, $feature) {
+            $languages = active_languages();
+            $defaultLanguage = default_language();
             
-            if (isset($request->title[$locale])) {
-                $feature->setTranslation('title', $locale, $request->title[$locale]);
+            $rules = [];
+            foreach ($languages as $language) {
+                $isRequired = $language->is_default;
+                $rules["title.{$language->code}"] = $isRequired ? 'required|string|max:255' : 'nullable|string|max:255';
+                $rules["description.{$language->code}"] = 'nullable|string';
             }
             
-            if (isset($request->description[$locale])) {
-                $feature->setTranslation('description', $locale, $request->description[$locale]);
+            $rules = array_merge($rules, [
+                'icon' => 'nullable|string|max:255',
+                'link_url' => 'nullable|string|max:255',
+                'order' => 'nullable|integer',
+                'active' => 'boolean',
+            ]);
+            
+            $request->validate($rules);
+            
+            // Update translatable fields
+            foreach ($languages as $language) {
+                $locale = $language->code;
+                
+                if (isset($request->title[$locale])) {
+                    $feature->setTranslation('title', $locale, $request->title[$locale]);
+                }
+                
+                if (isset($request->description[$locale])) {
+                    $feature->setTranslation('description', $locale, $request->description[$locale]);
+                }
             }
-        }
-        
-        // Update non-translatable fields
-        $feature->icon = $request->icon;
-        $feature->link_url = $request->link_url;
-        $feature->order = $request->order;
-        $feature->active = $request->has('active') ? 1 : 0;
-        
-        $feature->save();
-        
-        return redirect()->route('features.index')
-            ->with('success', 'Feature updated successfully');
+            
+            // Update non-translatable fields
+            $feature->icon = $request->icon;
+            $feature->link_url = $request->link_url;
+            $feature->order = $request->order;
+            $feature->active = $request->has('active') ? 1 : 0;
+            
+            $feature->save();
+            
+            return redirect()->route('features.index')
+                ->with('success', 'Feature updated successfully');
+        }, 'Feature updated successfully!');
     }
 
     public function destroy(Feature $feature)
     {
-        $feature->delete();
+        return $this->handleAjaxDelete(request(), function() use ($feature) {
+            $feature->delete();
 
-        return redirect()->route('features.index')
-            ->with('success', 'Feature deleted successfully');
+            return redirect()->route('features.index')
+                ->with('success', 'Feature deleted successfully');
+        }, 'Feature deleted successfully!');
     }
 }

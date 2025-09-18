@@ -16,6 +16,9 @@ use App\Models\Portfolio;
 use App\Models\SectionHeading; 
 use App\Models\AppointmentSetting;
 use App\Models\HomePageSeo;
+use App\Models\ContactPageSeo;
+use App\Models\ContactLocation;
+use App\Models\StaticPage;
 
 class PageController extends Controller
 {
@@ -213,5 +216,53 @@ class PageController extends Controller
         $seo = ContactPageSeo::first();
         
         return view('pages.contact', compact('locations', 'services', 'settings', 'seo'));
+    }
+
+    /**
+     * Display Terms & Conditions page
+     */
+    public function termsConditions()
+    {
+        $page = StaticPage::findBySlug('terms-conditions');
+        
+        if (!$page) {
+            abort(404);
+        }
+        
+        $settings = Setting::first();
+        
+        return view('pages.static-page', compact('page', 'settings'));
+    }
+
+    /**
+     * Display Privacy Policy page
+     */
+    public function privacyPolicy()
+    {
+        $page = StaticPage::findBySlug('privacy-policy');
+        
+        if (!$page) {
+            abort(404);
+        }
+        
+        $settings = Setting::first();
+        
+        return view('pages.static-page', compact('page', 'settings'));
+    }
+
+    /**
+     * Display Cookies page
+     */
+    public function cookies()
+    {
+        $page = StaticPage::findBySlug('cookies');
+        
+        if (!$page) {
+            abort(404);
+        }
+        
+        $settings = Setting::first();
+        
+        return view('pages.static-page', compact('page', 'settings'));
     }
 }

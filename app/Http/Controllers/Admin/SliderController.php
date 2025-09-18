@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Slider;
 use App\Models\Language;
+use App\Http\Controllers\Admin\Traits\AjaxResponseTrait;
 
 class SliderController extends Controller
 {
+    use AjaxResponseTrait;
     public function index()
     {
         $sliders = Slider::orderBy('order')->get();

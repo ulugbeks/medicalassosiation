@@ -16,7 +16,7 @@
         <h3 class="card-title">Edit Team Member</h3>
     </div>
     <div class="card-body">
-        <form action="{{ route('team.update', $member->id) }}" method="POST">
+        <form id="team-edit-form" action="{{ route('team.update', $member->id) }}" method="POST" data-ajax="true" data-auto-save="true">
             @csrf
             @method('PUT')
             <div class="row">
@@ -109,7 +109,9 @@
             </div>
             
             <div class="mt-4">
-                <button type="submit" class="btn btn-primary">Update Team Member</button>
+                <button type="submit" class="btn btn-primary" id="save-btn">
+                    <i class="fas fa-save"></i> Update Team Member
+                </button>
                 <a href="{{ route('team.index') }}" class="btn btn-secondary">Cancel</a>
             </div>
         </form>

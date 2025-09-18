@@ -16,7 +16,7 @@
         <h3 class="card-title">Create New Team Member</h3>
     </div>
     <div class="card-body">
-        <form action="{{ route('team.store') }}" method="POST">
+        <form id="team-create-form" action="{{ route('team.store') }}" method="POST" data-ajax="true">
             @csrf
             <div class="row">
                 <div class="col-md-6">
@@ -103,7 +103,9 @@
             </div>
             
             <div class="mt-4">
-                <button type="submit" class="btn btn-primary">Save Team Member</button>
+                <button type="submit" class="btn btn-primary" id="save-btn">
+                    <i class="fas fa-save"></i> Save Team Member
+                </button>
                 <a href="{{ route('team.index') }}" class="btn btn-secondary">Cancel</a>
             </div>
         </form>

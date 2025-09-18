@@ -51,7 +51,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ route('admin.dashboard') }}" class="brand-link">
+    <a href="{{ route('backend.dashboard') }}" class="brand-link">
       <span class="brand-text font-weight-light">Admin Panel</span>
     </a>
 
@@ -61,7 +61,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+            <a href="{{ route('backend.dashboard') }}" class="nav-link {{ request()->routeIs('backend.dashboard') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>Dashboard</p>
             </a>
@@ -181,8 +181,8 @@
           </li>
           
           <!-- Contact Menu Toggle -->
-          <li class="nav-item {{ request()->routeIs('admin.contacts') || request()->routeIs('contact-locations.*') ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ request()->routeIs('admin.contacts') || request()->routeIs('contact-locations.*') ? 'active' : '' }}">
+          <li class="nav-item {{ request()->routeIs('backend.contacts') || request()->routeIs('contact-locations.*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->routeIs('backend.contacts') || request()->routeIs('contact-locations.*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-address-book"></i>
               <p>
                 Contact
@@ -197,7 +197,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('admin.contacts') }}" class="nav-link {{ request()->routeIs('admin.contacts') ? 'active' : '' }}">
+                <a href="{{ route('backend.contacts') }}" class="nav-link {{ request()->routeIs('backend.contacts') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Messages</p>
                 </a>
@@ -243,6 +243,14 @@
               <p>Settings</p>
             </a>
           </li>
+          
+          <!-- Static Pages -->
+          <li class="nav-item">
+            <a href="{{ route('static-pages.index') }}" class="nav-link {{ request()->routeIs('static-pages.*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>Static Pages</p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -261,7 +269,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('backend.dashboard') }}">Home</a></li>
               @yield('breadcrumb')
             </ol>
           </div><!-- /.col -->
@@ -306,8 +314,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/js/adminlte.min.js"></script>
+<!-- Admin AJAX Form Handler -->
+<script src="{{ asset('js/admin-ajax-form.js') }}"></script>
 <!-- Custom JS -->
 @yield('js')
+
+<!-- Additional Scripts Stack -->
+@stack('scripts')
 
 @section('js')
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
